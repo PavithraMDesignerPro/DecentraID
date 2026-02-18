@@ -43,22 +43,32 @@ app.post("/register", async (req, res) => {
 // ✅ Login API
 app.post("/login", async (req, res) => {
   try {
-    const users = await User.find();
     const { descriptor } = req.body;
 
+    if (!descriptor) {
+      return res.status(400).json({ msg: "Descriptor missing" });
+    }
+
+    const users = await User.find();
+
     for (let user of users) {
+      if (!user.descriptor) continue;
+
       const dist = euclidean(user.descriptor, descriptor);
+
       if (dist < 0.7) {
         return res.json({ msg: "Login Success: " + user.name });
       }
     }
 
     res.json({ msg: "Face Not Matched" });
+
   } catch (err) {
-    console.log(err);
+    console.log("LOGIN ERROR:", err);
     res.status(500).json({ msg: "Server Error" });
   }
 });
+
 
 // Distance function
 function euclidean(d1, d2) {
