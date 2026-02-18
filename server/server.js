@@ -11,7 +11,7 @@ dotenv.config();
 
 // ✅ MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect("mongodb+srv://forprojectwork001:projectwork001@faceverification.oixunpt.mongodb.net/faceVerification")
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -22,6 +22,11 @@ const UserSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
+
+app.get("/", (req, res) => {
+  res.send("Face Auth Backend Running Successfully");
+});
+
 
 // ✅ Register API
 app.post("/register", async (req, res) => {
