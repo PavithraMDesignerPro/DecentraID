@@ -20,8 +20,7 @@ app.use(express.json());
 
 /* ================= MONGODB CONNECTION ================= */
 mongoose
-  .connect("MONGO_URL = mongodb+srv://forprojectwork001:projectwork001@faceverification.b19uz89.mongodb.net/faceVerification?retryWrites=true&w=majority
-")
+  .connect("mongodb+srv://forprojectwork001:projectwork001@faceverification.b19uz89.mongodb.net/faceVerification")
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => {
     console.log("❌ MongoDB Connection Error:", err);
